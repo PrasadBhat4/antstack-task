@@ -3,8 +3,7 @@ var CsvReadableStream = require("csv-reader");
 
 function isEmpty(obj) {
   for (var prop in obj) {
-    if (obj.hasOwnProperty(prop))
-      return false;
+    if (obj.hasOwnProperty(prop)) return false;
   }
 
   return true;
@@ -31,17 +30,13 @@ exports.readCsvFile = () => {
       var items = {};
       itemsArray.forEach(temp => {
         if (temp !== "") {
-          console.log("Inside TEMP");
           var tempSubArray = temp.split(":");
-          if(items.hasOwnProperty(tempSubArray[0])){
+          if (items.hasOwnProperty(tempSubArray[0])) {
             let value = items[tempSubArray[0]] + parseInt(tempSubArray[1]);
             items[tempSubArray[0]] = value;
-          }
-          else
-            items[tempSubArray[0]] = parseInt(tempSubArray[1]);
+          } else items[tempSubArray[0]] = parseInt(tempSubArray[1]);
         }
       });
-      console.log(items);
 
       let orderId = row[0];
       let customerId = row[1];
