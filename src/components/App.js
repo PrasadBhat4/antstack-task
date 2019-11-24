@@ -1,6 +1,6 @@
 import React from "react";
 import JsonAxios from "../apis/JsonAxios";
-import DashBoard from "./DashBoard";
+import DashBoard from "../DashBoard";
 
 class App extends React.Component {
   state = { response: "" };

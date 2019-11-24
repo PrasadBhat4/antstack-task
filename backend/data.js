@@ -1,6 +1,15 @@
 var fs = require("fs");
 var CsvReadableStream = require("csv-reader");
 
+function isEmpty(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop))
+      return false;
+  }
+
+  return true;
+}
+
 var exports = (module.exports = {});
 exports.readCsvFile = () => {
   var jsonMainObject = {};
@@ -22,10 +31,17 @@ exports.readCsvFile = () => {
       var items = {};
       itemsArray.forEach(temp => {
         if (temp !== "") {
-          let tempSubArray = temp.split(":");
-          items[tempSubArray[0]] = tempSubArray[1];
+          console.log("Inside TEMP");
+          var tempSubArray = temp.split(":");
+          if(items.hasOwnProperty(tempSubArray[0])){
+            let value = items[tempSubArray[0]] + parseInt(tempSubArray[1]);
+            items[tempSubArray[0]] = value;
+          }
+          else
+            items[tempSubArray[0]] = parseInt(tempSubArray[1]);
         }
       });
+      console.log(items);
 
       let orderId = row[0];
       let customerId = row[1];
@@ -49,4 +65,6 @@ exports.readCsvFile = () => {
       });
       console.log("No more rows!");
     });
+
+  return "Hello World";
 };
